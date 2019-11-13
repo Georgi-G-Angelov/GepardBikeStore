@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/js/main.js" charset="utf-8"></script>
+</head>
+<body>
+<div class="container">
+    <header id="main-header" class="container">
+        <a href="/">
+            <img class="logo" src="/static/images/gepard logo text.jpg"/>
+        </a>
+        <div align="right">
+            <a sec:authorize="isAuthenticated()" class="logger" href="/" th:href="@{/profile}" >[[${#httpServletRequest.remoteUser}]]</a>
+            <a sec:authorize="!isAuthenticated()" class="logger" href="/" th:href="@{/login}">Log in</a>
+            <a sec:authorize="!isAuthenticated()" class="logger" href="/" th:href="@{/auth/register}">Sign up</a>
+            <a sec:authorize="isAuthenticated()" class="logger" href="/" th:href="@{/logout}">Log out</a>
+        </div>
+    </header>
+    <header id="second-header" class="container">
+        <div align="center">
+            <a href="/">Home</a>
+            <a href="/bikes">Bikes</a>
+            <a href="/parts">Parts</a>
+            <a href="/contacts">Contacts</a>
+            <a href="/about">About</a>
+        </div>
+    </header>
+</div>
+<div id="about-pic">
+<img src="/static/images/gepard logo.png" style='width:15%;'>
+</div>
+<h1 align="center">Lorem ipsum</h1>
+<p align="center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/js/main.js" charset="utf-8"></script>
+</head>
+
+<body>
+<div class="container">
+  <header id="main-header" class="container">
+  <a href="/">
+  <img class="logo" src="/static/images/gepard logo text.jpg"/>
+  </a>
+  <div align="right">
+      <!--<a sec:authorize="isAuthenticated()" class="logger" href="/" th:href="@{'/users/' + ${#httpServletRequest.remoteUser}}" >[[${#httpServletRequest.remoteUser}]]</a>-->
+      <a sec:authorize="isAuthenticated()" class="logger" href="/" th:href="@{/profile}" >[[${#httpServletRequest.remoteUser}]]</a>
+      <a sec:authorize="!isAuthenticated()" class="logger" href="/" th:href="@{/login}">Log in</a>
+      <a sec:authorize="!isAuthenticated()" class="logger" href="/" th:href="@{/auth/register}">Sign up</a>
+      <a sec:authorize="isAuthenticated()" class="logger" href="/" th:href="@{/logout}">Log out</a>
+  </div>
+  </header>
+  <header id="second-header" class="container">
+    <div align="center">
+      <a href="/">Home</a>
+      <a href="/bikes">Bikes</a>
+      <a href="/parts">Parts</a>
+      <a href="/contacts">Contacts</a>
+      <a href="/about">About</a>
+    </div>
+  </header>
+</div>
+
+
+<div class="container">
+    <h1> </h1>
+</div>
+<div class="slideshow-container">
+
+    <div class="mySlides fade">
+        <div class="numbertext">1 / 10</div>
+        <img src="/static/images/classic.jpg" style="width:100%">
+        <div class="text"></div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">2 / 10</div>
+        <img src="/static/images/prototype 2.jpg" style="width:100%">
+        <div class="text"></div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">3 / 10</div>
+        <img src="/static/images/balance bike.jpg" style="width:100%">
+        <div class="text"></div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">4 / 10</div>
+        <img src="/static/images/cruiser.jpg" style="width:100%">
+        <div class="text"></div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">5 / 10</div>
+        <img src="/static/images/prototype.jpg" style="width:100%">
+        <div class="text"></div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">6 / 10</div>
+        <img src="/static/images/cruiser 2.jpg" style="width:100%">
+        <div class="text"></div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">7 / 10</div>
+        <img src="/static/images/cruiser 3.jpg" style="width:100%">
+        <div class="text"></div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">8 / 10</div>
+        <img src="/static/images/organic bike.jpg" style="width:100%">
+        <div class="text"></div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">9 / 10</div>
+        <img src="/static/images/aerofold.jpg" style="width:100%">
+        <div class="text"></div>
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+</div>
+<br>
+
+<div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+    <span class="dot" onclick="currentSlide(6)"></span>
+    <span class="dot" onclick="currentSlide(7)"></span>
+    <span class="dot" onclick="currentSlide(8)"></span>
+    <span class="dot" onclick="currentSlide(9)"></span>
+</div>
+
+</body>
+
+<script>
+  var slideIndex = 1;
+  showSlides(slideIndex);
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+
+  function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
+  }
+  </script>
+
+
+</html>

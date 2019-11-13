@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/js/main.js" charset="utf-8"></script>
+</head>
+<body>
+<div class="container">
+  <header id="main-header" class="container">
+  <a href="/">
+  <img class="logo" src="/static/images/gepard logo text.jpg"/>
+  </a>
+  </header>
+  <header id="second-header" class="container">
+    <div align="center">
+      <a href="/">Home</a>
+      <a href="/bikes">Bikes</a>
+      <a href="/parts">Parts</a>
+      <a href="/contacts">Contacts</a>
+      <a href="/about">About</a>
+    </div>
+  </header>
+</div>
+
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+
+<div th:if="${param.logout}">
+    You have been logged out
+</div>
+
+
+<div class="container">
+    <div class="login-container">
+        <div id="output"></div>
+        <div class="avatar"></div>
+        <div class="form-box">
+            <form th:action="@{/auth/register}" method="post">
+                <input name="username" type="text" placeholder="username (6-45 characters)">
+                <input name="password" type="password" placeholder="password (8-45 characters)">
+                <button class="login" type="submit">Register</button>
+            </form>
+            <p>Already have an account?</p>
+            <a href="/login">Log in</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

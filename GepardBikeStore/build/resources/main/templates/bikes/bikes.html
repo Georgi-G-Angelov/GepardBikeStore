@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/js/main.js" charset="utf-8"></script>
+</head>
+<body>
+<div class="container">
+    <header id="main-header" class="container">
+        <a href="/">
+            <img class="logo" src="/static/images/gepard logo text.jpg"/>
+        </a>
+        <div align="right">
+            <a sec:authorize="isAuthenticated()" class="logger" href="/" th:href="@{/profile}" >[[${#httpServletRequest.remoteUser}]]</a>
+            <a sec:authorize="!isAuthenticated()" class="logger" href="/" th:href="@{/login}">Log in</a>
+            <a sec:authorize="!isAuthenticated()" class="logger" href="/" th:href="@{/auth/register}">Sign up</a>
+            <a sec:authorize="isAuthenticated()" class="logger" href="/" th:href="@{/logout}">Log out</a>
+        </div>
+    </header>
+    <header id="second-header" class="container">
+        <div align="center">
+            <a href="/">Home</a>
+            <a href="/bikes">Bikes</a>
+            <a href="/parts">Parts</a>
+            <a href="/contacts">Contacts</a>
+            <a href="/about">About</a>
+        </div>
+    </header>
+</div>
+<div class="categoryNav">
+    <a href="/bikes">
+        <button>All</button>
+    </a>
+    <a href="/bikes/bycategory/BMX">
+        <button>BMX</button>
+    </a>
+    <a href="/bikes/bycategory/MTB">
+        <button>MTB</button>
+    </a>
+    <a href="/bikes/bycategory/Road">
+        <button>Road</button>
+    </a>
+    <a href="/bikes/bycategory/City">
+        <button>City</button>
+    </a>
+    <form action="#" th:action="@{${action}}" method="post">
+        <input type="text" name="name" placeholder="search...">
+        <button type="submit">Search</button>
+    </form>
+</div>
+<p th:text="${message}"></p>
+<div th:each="bike: ${bikes}" class="col" >
+    <a class="product-box" th:href="@{'/bikes/' + ${bike.getId()}}">
+        <img class="product-pic" th:src="@{'/static/images/' + ${bike.getImage()} + '.jpg'}" />
+        <h3 th:text="${bike.name}"></h3>
+        <h2 th:text="${bike.price + '0 лв.'}"></h2>
+    </a>
+    <a href="/login" sec:authorize="!isAuthenticated()">
+    <button class="addToCart"> add to cart </button>
+    </a>
+    <a th:href="@{'bikes/addToCart/' + ${bike.getId()}}" sec:authorize="isAuthenticated()">
+        <button class="addToCart"> add to cart </button>
+    </a>
+</div>
+</body>
+</html>
